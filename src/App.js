@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Navbar from './Components/Navbar'
+import Home from './Pages/Home'
+import About from './Pages/About'
+import FAQs from './Pages/FAQs'
+import Contact from './Pages/Contact'
+import Sidebar from './Components/Sidebar'
+import Media from 'react-media'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Media query="(min-width: 500px)">
+          {(matches) => {
+            return matches ? <Sidebar /> : <Navbar />
+          }}
+        </Media>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" exact component={About} />
+          <Route path="/faqs" exact component={FAQs} />
+          <Route path="/contact" exact component={Contact} />
+        </Switch>
+
+      </Router>
+    </>
   );
 }
 
